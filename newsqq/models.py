@@ -22,6 +22,7 @@ class Article(Document):
 class Cate(Document):
     type_name = StringField()
     type_link = StringField()
+    type_en = StringField()
     meta = {'collection': 'cate'}
 
 
