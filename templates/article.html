@@ -20,10 +20,10 @@
                                            target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;{{ item.source }}</a>
                                         <span>&nbsp;&nbsp;&nbsp;&nbsp;{{ item.time }}</span>
                                         <div class="ui list">
-{#                                            <div class="item">#}
-{#                                                <div class="header"><i class="right triangle icon"></i>新闻内容前几句话：</div>#}
-{#                                                <p>{{ item.introduce|linebreaks }}</p>#}
-{#                                            </div>#}
+                                            {#                                            <div class="item">#}
+                                            {#                                                <div class="header"><i class="right triangle icon"></i>新闻内容前几句话：</div>#}
+                                            {#                                                <p>{{ item.introduce|linebreaks }}</p>#}
+                                            {#                                            </div>#}
                                             <div class="item">
                                                 <div class="header"><i class="right triangle icon"></i>textRank4Zh生成的新闻摘要：
                                                 </div>
@@ -67,6 +67,14 @@
                         {% if article.has_next %}
                             <a class="item" id="next_page">下一页</a>
                         {% endif %}
+                    </div>
+
+                    <div class="ui center aligned container" style="margin: 30px">
+                        <div><i class="copyright icon"></i><span>2018</span>
+                            <a href="https://github.com/yonghuizhong" target="_blank" style="color: #212121">
+                                <i class="github icon"></i><span>yonghuizhong</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
