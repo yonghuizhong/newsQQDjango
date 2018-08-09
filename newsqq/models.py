@@ -16,6 +16,8 @@ class Article(Document):
     keywords = ListField()
     time = DateTimeField()
     source = StringField()
+    summary = StringField()
+    my_summary = StringField()
     meta = {'collection': 'links'}
 
 

@@ -19,7 +19,20 @@
                                         <a href="{{ item.href }}"
                                            target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;{{ item.source }}</a>
                                         <span>&nbsp;&nbsp;&nbsp;&nbsp;{{ item.time }}</span>
-                                        <p>{{ item.introduce|linebreaks }}</p>
+                                        <div class="ui list">
+                                            <div class="item">
+												<div class="header"><i class="right triangle icon"></i>新闻内容前几句话：</div>
+												<p>{{ item.introduce|linebreaks }}</p>
+											</div>
+											<div class="item">
+												<div class="header"><i class="right triangle icon"></i>textRank4Zh生成的新闻摘要：</div>
+												<p>{{ item.summary|linebreaks }}</p>
+											</div>
+											<div class="item">
+												<div class="header"><i class="right triangle icon"></i>我的新闻摘要：</div>
+												<p>{{ item.my_summary|linebreaks }}</p>
+											</div>
+                                        </div>
                                     </div>
                                     <div class="extra">
                                         {% for i in item.keywords %}
