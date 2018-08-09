@@ -1,7 +1,7 @@
 {% extends 'basic.html' %}
 {% block articlecontent %}
-    <div class="ui equal width grid">
-        <div class="row">
+    <div class="ui equal width grid" style="width: 75%;margin: 0 auto">
+        <div class="row" style="padding-top: 0">
             <div class="column">
                 <div class="ui container segment">
                     <div class="ui divided items">
@@ -18,25 +18,13 @@
                                         <span style="color: rgba(0,132,255,0.76)">{{ item.category }}</span>
                                         <a href="{{ item.href }}"
                                            target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;{{ item.source }}</a>
-                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;{{ item.time }}</span>
-                                        <div class="ui list">
-                                            {#                                            <div class="item">#}
-                                            {#                                                <div class="header"><i class="right triangle icon"></i>新闻内容前几句话：</div>#}
-                                            {#                                                <p>{{ item.introduce|linebreaks }}</p>#}
-                                            {#                                            </div>#}
-                                            <div class="item">
-                                                <div class="header"><i class="right triangle icon"></i>textRank4Zh生成的新闻摘要：
-                                                </div>
-                                                {% if item.summary %}
-                                                    <p>{{ item.summary|linebreaks }}</p>
-                                                {% else %}
-                                                    <p>{{ item.introduce|linebreaks }}</p>
-                                                {% endif %}
-                                            </div>
-                                            <div class="item">
-                                                <div class="header"><i class="right triangle icon"></i>我的新闻摘要：</div>
-                                                <p>{{ item.my_summary|linebreaks }}</p>
-                                            </div>
+                                        <span style="color: #888888">&nbsp;&nbsp;&nbsp;&nbsp;{{ item.time }}</span>
+                                        <div style="color: #666666">
+                                            {% if item.summary %}
+                                                <p>{{ item.summary|linebreaks }}</p>
+                                            {% else %}
+                                                <p>{{ item.introduce|linebreaks }}</p>
+                                            {% endif %}
                                         </div>
                                     </div>
                                     <div class="extra">
@@ -54,19 +42,21 @@
                         {% endfor %}
                     </div>
 
-                    <div class="ui pagination pointing menu">
-                        {% if article.has_previous %}
-                            <a class="item" id="pre_page">上一页</a>
-                        {% endif %}
-                        {% for i in left_array %}
-                            <div class="item page_item" id="{{ i }}">{{ i }}</div>
-                        {% endfor %}
-                        {% for i in right_array %}
-                            <div class="item page_item" id="{{ i }}">{{ i }}</div>
-                        {% endfor %}
-                        {% if article.has_next %}
-                            <a class="item" id="next_page">下一页</a>
-                        {% endif %}
+                    <div class="ui center aligned container" style="margin-top: 50px">
+                        <div class="ui pagination pointing menu">
+                            {% if article.has_previous %}
+                                <a class="item" id="pre_page"><span> < </span>&nbsp;上一页</a>
+                            {% endif %}
+                            {% for i in left_array %}
+                                <div class="item page_item" id="{{ i }}">{{ i }}</div>
+                            {% endfor %}
+                            {% for i in right_array %}
+                                <div class="item page_item" id="{{ i }}">{{ i }}</div>
+                            {% endfor %}
+                            {% if article.has_next %}
+                                <a class="item" id="next_page">下一页&nbsp;<span> > </span></a>
+                            {% endif %}
+                        </div>
                     </div>
 
                     <div class="ui center aligned container" style="margin: 30px">
@@ -84,7 +74,7 @@
 
 {% block articlejs %}
     <script>
-        //上一页下一页翻页
+        //上一页下一页
         $('#pre_page').click(function () {
             var url = window.location.search;
             var cate = url.split('?')[1].split('=')[1].split('&')[0];
@@ -101,8 +91,25 @@
                 window.location.href = "http://127.0.0.1:8000/article/" + "?cate=" + cate + "&page={{ article.next_page_number }}";
             {% endif %}
         });
-        //分页栏点击效果
+        $("#pre_page").hover(function () {
+            $(this).addClass("active");
+        }, function () {
+            $(this).removeClass("active");
+        });
+        $("#next_page").hover(function () {
+            $(this).addClass("active");
+        }, function () {
+            $(this).removeClass("active");
+        });
+        //分页栏颜色效果
         $("#" + {{ article.number }}).addClass("active teal");
+        $(".page_item").hover(function () {
+            $(this).addClass("active");
+        }, function () {
+            if ($(this).attr("id") != {{ article.number }})
+                $(this).removeClass("active");
+        });
+        //分页栏点击翻页
         $(".page_item").click(function () {
             var url = window.location.search;
             var cate = url.split('?')[1].split('=')[1].split('&')[0];
