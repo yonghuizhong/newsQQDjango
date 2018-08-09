@@ -7,7 +7,7 @@
                     <div class="ui divided items">
                         {% for item in article %}
                             <div class="item">
-                                <div class="image">
+                                <div class="ui medium rectangle image">
                                     <img src="{{ item.image }}">
                                 </div>
                                 <div class="content">
@@ -20,18 +20,23 @@
                                            target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;{{ item.source }}</a>
                                         <span>&nbsp;&nbsp;&nbsp;&nbsp;{{ item.time }}</span>
                                         <div class="ui list">
+{#                                            <div class="item">#}
+{#                                                <div class="header"><i class="right triangle icon"></i>新闻内容前几句话：</div>#}
+{#                                                <p>{{ item.introduce|linebreaks }}</p>#}
+{#                                            </div>#}
                                             <div class="item">
-												<div class="header"><i class="right triangle icon"></i>新闻内容前几句话：</div>
-												<p>{{ item.introduce|linebreaks }}</p>
-											</div>
-											<div class="item">
-												<div class="header"><i class="right triangle icon"></i>textRank4Zh生成的新闻摘要：</div>
-												<p>{{ item.summary|linebreaks }}</p>
-											</div>
-											<div class="item">
-												<div class="header"><i class="right triangle icon"></i>我的新闻摘要：</div>
-												<p>{{ item.my_summary|linebreaks }}</p>
-											</div>
+                                                <div class="header"><i class="right triangle icon"></i>textRank4Zh生成的新闻摘要：
+                                                </div>
+                                                {% if item.summary %}
+                                                    <p>{{ item.summary|linebreaks }}</p>
+                                                {% else %}
+                                                    <p>{{ item.introduce|linebreaks }}</p>
+                                                {% endif %}
+                                            </div>
+                                            <div class="item">
+                                                <div class="header"><i class="right triangle icon"></i>我的新闻摘要：</div>
+                                                <p>{{ item.my_summary|linebreaks }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="extra">
@@ -71,6 +76,7 @@
 
 {% block articlejs %}
     <script>
+        //上一页下一页翻页
         $('#pre_page').click(function () {
             var url = window.location.search;
             var cate = url.split('?')[1].split('=')[1].split('&')[0];
@@ -78,7 +84,6 @@
                 window.location.href = "http://127.0.0.1:8000/article/" + "?cate=" + cate + "&page={{ article.previous_page_number }}";
             {% endif %}
         });
-
         $('#next_page').click(function () {
             var url = window.location.search;
             var cate = 'politics';
@@ -88,6 +93,7 @@
                 window.location.href = "http://127.0.0.1:8000/article/" + "?cate=" + cate + "&page={{ article.next_page_number }}";
             {% endif %}
         });
+        //分页栏点击效果
         $("#" + {{ article.number }}).addClass("active teal");
         $(".page_item").click(function () {
             var url = window.location.search;
@@ -95,6 +101,14 @@
             var id = $(this).attr("id");
             window.location.href = "http://127.0.0.1:8000/article/" + "?cate=" + cate + "&page=" + id;
         });
-
+        //标题鼠标悬浮和点击的效果
+        $(".ui.header").hover(function () {
+            $(this).addClass("blue");
+        }, function () {
+            $(this).removeClass("blue");
+        });
+        $(".ui.header").click(function () {
+            $(this).css("color", "#666");
+        });
     </script>
 {% endblock %}
