@@ -6,8 +6,8 @@
                 <div class="ui container segment">
                     <div class="ui divided items">
                         {% for item in article %}
-                            <div class="item">
-                                <div class="ui medium rectangle image">
+                            <div class="item news_item">
+                                <div class="ui medium rectangle image" style="overflow: hidden">
                                     <img src="{{ item.image }}">
                                 </div>
                                 <div class="content">
@@ -31,7 +31,7 @@
                                         {% for i in item.keywords %}
                                             {% if i == "" %}
                                             {% else %}
-                                                <div class="ui label">
+                                                <div class="ui label" style="color: #888888">
                                                     {{ i }}
                                                 </div>
                                             {% endif %}
@@ -124,6 +124,12 @@
         });
         $(".ui.header").click(function () {
             $(this).css("color", "#666");
+        });
+        //图片缩放效果
+        $(".news_item").hover(function () {
+            $(this).find("img").css({"transform": "scale(1.08)", "transition-duration": "1.2s"});
+        }, function () {
+            $(this).find("img").css({"transform": "scale(1)", "transition-duration": "1.2s"});
         });
     </script>
 {% endblock %}
