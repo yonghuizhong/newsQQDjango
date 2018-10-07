@@ -75,56 +75,66 @@
 {% block articlejs %}
     <script>
         //上一页下一页
-        $('#pre_page').click(function () {
-            var url = window.location.search;
-            var cate = url.split('?')[1].split('=')[1].split('&')[0];
-            {% if article.has_previous %}
-                window.location.href = "http://127.0.0.1:8000/article/" + "?cate=" + cate + "&page={{ article.previous_page_number }}";
-            {% endif %}
-        });
-        $('#next_page').click(function () {
-            var url = window.location.search;
-            var cate = 'politics';
-            if (url.indexOf("?") != -1)
-                cate = url.split('?')[1].split('=')[1].split('&')[0];
-            {% if article.has_next %}
-                window.location.href = "http://127.0.0.1:8000/article/" + "?cate=" + cate + "&page={{ article.next_page_number }}";
-            {% endif %}
-        });
-        $("#pre_page").hover(function () {
-            $(this).addClass("active");
-        }, function () {
-            $(this).removeClass("active");
-        });
-        $("#next_page").hover(function () {
-            $(this).addClass("active");
-        }, function () {
-            $(this).removeClass("active");
-        });
-        //分页栏颜色效果
-        $("#" + {{ article.number }}).addClass("active teal");
-        $(".page_item").hover(function () {
-            $(this).addClass("active");
-        }, function () {
-            if ($(this).attr("id") != {{ article.number }})
+        $('#pre_page')
+            .click(function () {
+                var url = window.location.search;
+                var cate = url.split('?')[1].split('=')[1].split('&')[0];
+                {% if article.has_previous %}
+                    window.location.href = "http://127.0.0.1:8000/article/" + "?cate=" + cate + "&page={{ article.previous_page_number }}";
+                {% endif %}
+            })
+            .hover(function () {
+                $(this).addClass("active");
+            }, function () {
                 $(this).removeClass("active");
-        });
-        //分页栏点击翻页
-        $(".page_item").click(function () {
-            var url = window.location.search;
-            var cate = url.split('?')[1].split('=')[1].split('&')[0];
-            var id = $(this).attr("id");
-            window.location.href = "http://127.0.0.1:8000/article/" + "?cate=" + cate + "&page=" + id;
-        });
-        //标题鼠标悬浮和点击的效果
-        $(".ui.header").hover(function () {
-            $(this).addClass("blue");
-        }, function () {
-            $(this).removeClass("blue");
-        });
-        $(".ui.header").click(function () {
-            $(this).css("color", "#666");
-        });
+            });
+
+        $('#next_page')
+            .click(function () {
+                var url = window.location.search;
+                var cate = 'politics';
+                if (url.indexOf("?") != -1)
+                    cate = url.split('?')[1].split('=')[1].split('&')[0];
+                {% if article.has_next %}
+                    window.location.href = "http://127.0.0.1:8000/article/" + "?cate=" + cate + "&page={{ article.next_page_number }}";
+                {% endif %}
+            })
+            .hover(function () {
+                $(this).addClass("active");
+            }, function () {
+                $(this).removeClass("active");
+            });
+
+        //当前页的页码变为激活状态
+        $("#" + {{ article.number }}).addClass("active teal");
+
+        $(".page_item")
+            //分页栏点击翻页
+            .click(function () {
+                var url = window.location.search;
+                var cate = url.split('?')[1].split('=')[1].split('&')[0];
+                var id = $(this).attr("id");
+                window.location.href = "http://127.0.0.1:8000/article/" + "?cate=" + cate + "&page=" + id;
+            })
+            //分页栏颜色效果
+            .hover(function () {
+                $(this).addClass("active");
+            }, function () {
+                if ($(this).attr("id") != {{ article.number }})
+                    $(this).removeClass("active");
+            });
+
+        //标题鼠标点击和悬浮的效果
+        $(".ui.header")
+            .click(function () {
+                $(this).css("color", "#666");
+            })
+            .hover(function () {
+                $(this).addClass("blue");
+            }, function () {
+                $(this).removeClass("blue");
+            });
+
         //图片缩放效果
         $(".news_item").hover(function () {
             $(this).find("img").css({"transform": "scale(1.08)", "transition-duration": "1.2s"});
