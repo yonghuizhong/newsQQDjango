@@ -74,13 +74,14 @@
 
 {% block articlejs %}
     <script>
+        var my_url = 'http://127.0.0.1:8000/article/';  //服务器上记得替换
         //上一页下一页
         $('#pre_page')
             .click(function () {
                 var url = window.location.search;
                 var cate = url.split('?')[1].split('=')[1].split('&')[0];
                 {% if article.has_previous %}
-                    window.location.href = "http://127.0.0.1:8000/article/" + "?cate=" + cate + "&page={{ article.previous_page_number }}";
+                    window.location.href = my_url + "?cate=" + cate + "&page={{ article.previous_page_number }}";
                 {% endif %}
             })
             .hover(function () {
@@ -96,7 +97,7 @@
                 if (url.indexOf("?") != -1)
                     cate = url.split('?')[1].split('=')[1].split('&')[0];
                 {% if article.has_next %}
-                    window.location.href = "http://127.0.0.1:8000/article/" + "?cate=" + cate + "&page={{ article.next_page_number }}";
+                    window.location.href = my_url + "?cate=" + cate + "&page={{ article.next_page_number }}";
                 {% endif %}
             })
             .hover(function () {
@@ -111,10 +112,16 @@
         $(".page_item")
             //分页栏点击翻页
             .click(function () {
-                var url = window.location.search;
-                var cate = url.split('?')[1].split('=')[1].split('&')[0];
+                var url = window.location.search;   //返回从当前URL的?号开始的字符串
+                var cate = 'politics';
                 var id = $(this).attr("id");
-                window.location.href = "http://127.0.0.1:8000/article/" + "?cate=" + cate + "&page=" + id;
+                if(url === ''){
+                    window.location.href = my_url + "?cate=" + cate + "&page=" + id;
+                }
+                else{
+                    cate = url.split('?')[1].split('=')[1].split('&')[0];
+                    window.location.href = my_url + "?cate=" + cate + "&page=" + id;
+                }
             })
             //分页栏颜色效果
             .hover(function () {

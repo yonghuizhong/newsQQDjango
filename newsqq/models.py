@@ -18,7 +18,7 @@ class Article(Document):
     source = StringField()
     summary = StringField()
     my_summary = StringField()
-    meta = {'collection': 'links'}
+    meta = {'collection': 'links'}  # 服务器上改为links_web，因为是每天更新
 
 
 class Cate(Document):
