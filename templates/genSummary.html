@@ -1,0 +1,32 @@
+{% extends 'basic.html' %}
+{% block genSummary %}
+    <div class="ui equal width grid" style="width: 75%;margin: 0 auto">
+        <div class="row" style="padding-top: 0">
+            <div class="column">
+                <div class="ui container segment">
+                    <h4 class="ui orange left ribbon label">新闻正文</h4>
+                    <div style="margin: 10px 0">
+                        <textarea rows="15" placeholder="请输入新闻内容..." style="max-width: 100%; min-width: 100%; font-size: 16px"></textarea>
+                    </div>
+
+                    <h4 class="ui orange left ribbon label">新闻摘要</h4>
+                    <button class="ui basic button">生成摘要</button>
+                    <button class="ui basic loading button">加载</button>
+                    <div style="margin: 10px 0">
+                        <textarea rows="5" placeholder="生成的新闻摘要将呈现于此" style="max-width: 100%; min-width: 100%; font-size: 16px" readonly></textarea>
+                    </div>
+                    <div class="ui center aligned container" style="margin: 30px">
+                        <div><i class="copyright icon"></i><span>2018</span>
+                            <a href="https://github.com/yonghuizhong" target="_blank" style="color: #212121">
+                                <i class="github icon"></i><span>yonghuizhong</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block summaryjs %}
+{% endblock %}

@@ -33,3 +33,12 @@ def all_cate(request):
         'right_array': right_array
     }
     return render(request, 'article.html', context)
+
+
+# genSummary.html: 生成摘要页面
+def summary(request):
+    cate_type = Cate.objects()
+    context = {
+        'cate_type': cate_type
+    }
+    return render(request, 'genSummary.html', context)

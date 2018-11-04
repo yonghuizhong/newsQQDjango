@@ -36,7 +36,7 @@
             display: none;
         }
 
-        @media only screen and (max-width: 1024px){
+        @media only screen and (max-width: 1024px) {
             .ui.equal.width.grid {
                 width: 100% !important;
             }
@@ -47,12 +47,15 @@
             .ui.fixed.menu .item {
                 display: none !important;
             }
+
             .ui.equal.width.grid {
                 width: 100% !important;
             }
+
             .column {
                 padding: 0 !important;
             }
+
             .ui.container.segment {
                 margin: 0 !important;
             }
@@ -94,8 +97,11 @@
     <div class="ui vertical center aligned segment fadeout" style="background-color: #2B313C">
         <div class="ui container">
             <div class="ui secondary inverted pointing menu" style="border-width: 0; font-size: 18px">
-                <a class="toc item">
+                <a class="toc item" style="padding-right: 0px">
                     <i class="sidebar icon"></i>
+                </a>
+                <a href="/summary" title="新闻摘要" style="padding: 12px 15px 0px">
+                    <img src="http://114.116.72.112/favicon.ico">
                 </a>
                 {% for i in cate_type %}
                     <a class="item menu_item {{ i.type_en }}" href="{{ i.type_link }}">{{ i.type_name }}</a>
@@ -105,6 +111,9 @@
     </div>
     {#文章列表部分#}
     {% block articlecontent %}
+    {% endblock %}
+    {#生成摘要部分#}
+    {% block genSummary %}
     {% endblock %}
 
 </div>
@@ -131,6 +140,8 @@
     });
 </script>
 {% block articlejs %}
+{% endblock %}
+{% block summaryjs %}
 {% endblock %}
 </body>
 </html>
