@@ -2,6 +2,8 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from newsqq.models import Article
 from newsqq.models import Cate
+from django.http import JsonResponse
+from textrank4zh import TextRank4Sentence
 
 
 # Create your views here.
@@ -42,3 +44,19 @@ def summary(request):
         'cate_type': cate_type
     }
     return render(request, 'genSummary.html', context)
+
+
+# ajax
+def summaryAjax(request):
+    article = request.POST.get('article', '默认字段')
+    # 暂时使用textRank生成摘要
+    tr4s = TextRank4Sentence()
+    tr4s.analyze(text=article, lower=True, source='all_filters')
+    try:
+        my_summary = tr4s.get_key_sentences(num=1)[0].sentence
+    except:
+        my_summary = '生成新闻摘要错误'
+    context = {
+        'summary': my_summary
+    }
+    return JsonResponse(context)

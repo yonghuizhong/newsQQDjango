@@ -6,14 +6,15 @@
                 <div class="ui container segment">
                     <h4 class="ui orange left ribbon label">新闻正文</h4>
                     <div style="margin: 10px 0">
-                        <textarea rows="15" placeholder="请输入新闻内容..." style="max-width: 100%; min-width: 100%; font-size: 16px"></textarea>
+                        <textarea class="ui message" id="input" rows="10" placeholder="请输入新闻内容..."
+                                  style="max-width: 100%; min-width: 100%; background: #ffffff;"></textarea>
                     </div>
 
                     <h4 class="ui orange left ribbon label">新闻摘要</h4>
-                    <button class="ui basic button">生成摘要</button>
-                    <button class="ui basic loading button">加载</button>
-                    <div style="margin: 10px 0">
-                        <textarea rows="5" placeholder="生成的新闻摘要将呈现于此" style="max-width: 100%; min-width: 100%; font-size: 16px" readonly></textarea>
+                    <button class="ui basic button" id="genButton">生成摘要</button>
+                    <button class="ui basic loading button" id="loadingButton" style="display:none;">正在加载</button>
+                    <div class="ui info message" style="margin: 10px 0; height: 100px;">
+                        <p id="output">生成的新闻摘要将呈现于此...</p>
                     </div>
                     <div class="ui center aligned container" style="margin: 30px">
                         <div><i class="copyright icon"></i><span>2018</span>
@@ -29,4 +30,36 @@
 {% endblock %}
 
 {% block summaryjs %}
+    <script>
+        $(document).ready(function () {
+            $('#genButton').click(function () {
+                $(this).css("display", "none");
+                $('#loadingButton').css("display", "inline-block");
+
+                var myArticle = $('#input').val();
+                var myData = {
+                    article: myArticle
+                };
+                //console.log(myData);
+
+                $.ajaxSetup({
+                    data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
+                });     //Django中，post请求需要CSRF认证
+                $.ajax({
+                    type: "POST",
+                    url: "http://127.0.0.1:8000/summary/ajax",  //服务器上记得更换
+                    data: myData,
+                    success: function (data) {
+                        //console.log(data);
+                        $('#output').text(data['summary']);
+                        $('#loadingButton').css("display", "none");
+                        $('#genButton').css("display", "inline-block");
+                    },
+                    error: function (data) {
+                        alert("ajax error");
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}

@@ -134,9 +134,12 @@
         $('.ui.sidebar')
             .sidebar('attach events', '.toc.item');
         var url = window.location.search;
-        var cate = url.split('?')[1].split('=')[1].split('&')[0];
+        var cate = 'politics';
+        if (url.indexOf("?") != -1)
+            cate = url.split('?')[1].split('=')[1].split('&')[0];
         $('.menu_item').removeClass('active');
-        $("." + cate.toString()).addClass('active');
+        if (window.location.pathname == '/article/')
+            $("." + cate.toString()).addClass('active');
     });
 </script>
 {% block articlejs %}
