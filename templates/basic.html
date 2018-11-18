@@ -86,7 +86,7 @@
     </div>
 </div>
 <!--侧边栏-->
-<div class="ui vertical inverted sidebar menu">
+<div class="ui thin vertical inverted sidebar menu">
     {% for i in cate_type %}
         <a class="item menu_item {{ i.type_en }}" href="{{ i.type_link }}">{{ i.type_name }}</a>
     {% endfor %}
@@ -94,14 +94,14 @@
 <!--以下为网站内容-->
 <div class="pusher" style="background-color: #f0f0f0">
     <!--顶部菜单栏-->
-    <div class="ui vertical center aligned segment fadeout" style="background-color: #2B313C">
+    <div class="ui vertical center aligned segment fadeout" style="background-color: #2B313C; padding:6px 0">
         <div class="ui container">
-            <div class="ui secondary inverted pointing menu" style="border-width: 0; font-size: 18px">
+            <div class="ui secondary inverted pointing menu" style="border-width: 0; font-size: 16px">
                 <a class="toc item" style="padding-right: 0px">
                     <i class="sidebar icon"></i>
                 </a>
-                <a href="/summary" title="新闻摘要" style="padding: 12px 15px 0px">
-                    <img src="http://114.116.72.112/favicon.ico">
+                <a href="/summary" title="新闻摘要" style="padding: 12px 15px 0px" target="_blank">
+                    <img src="{% static 'img/logo.ico' %}" style="width:85px;">
                 </a>
                 {% for i in cate_type %}
                     <a class="item menu_item {{ i.type_en }}" href="{{ i.type_link }}">{{ i.type_name }}</a>
