@@ -17,22 +17,18 @@ def all_cate(request):
     load = paginator.page(page)
 
     if load.number <= 6:
-        left_array = [i for i in range(1, 7)]
-        right_array = [i for i in range(7, 11)]
+        page_array = [i for i in range(1, 11)]
     elif load.number <= load.paginator.num_pages - 4:
-        left_array = [i for i in range(load.number - 5, load.number)]
-        right_array = [i for i in range(load.number, load.number + 5)]
+        page_array = [i for i in range(load.number - 5, load.number + 5)]
     else:
-        left_array = [i for i in range(load.number - 5, load.number)]
-        right_array = [i for i in range(load.number, load.paginator.num_pages + 1)]
+        page_array = [i for i in range(load.number - 5, load.paginator.num_pages + 1)]
 
     cate_type = Cate.objects()
 
     context = {
         'article': load,
         'cate_type': cate_type,
-        'left_array': left_array,
-        'right_array': right_array
+        'page_array': page_array,
     }
     return render(request, 'article.html', context)
 

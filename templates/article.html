@@ -47,10 +47,7 @@
                             {% if article.has_previous %}
                                 <a class="item" id="pre_page"><span> < </span>&nbsp;上一页</a>
                             {% endif %}
-                            {% for i in left_array %}
-                                <div class="item page_item" id="{{ i }}">{{ i }}</div>
-                            {% endfor %}
-                            {% for i in right_array %}
+                            {% for i in page_array %}
                                 <div class="item page_item" id="{{ i }}">{{ i }}</div>
                             {% endfor %}
                             {% if article.has_next %}
