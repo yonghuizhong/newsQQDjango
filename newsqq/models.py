@@ -18,6 +18,9 @@ class Article(Document):
     source = StringField()
     summary = StringField()
     my_summary = StringField()
+    second_article = StringField()
+    second_href = StringField()
+    _id = ObjectIdField()
     meta = {'collection': 'links'}  # 服务器上改为links_web，因为是每天更新
 
 

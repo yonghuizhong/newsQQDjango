@@ -1,6 +1,6 @@
 {% extends 'basic.html' %}
 {% block articlecontent %}
-    <div class="ui equal width grid" style="width: 75%;margin: 0 auto">
+    <div class="ui equal width grid" style="width: 70%;margin: 0 auto">
         <div class="row" style="padding-top: 0">
             <div class="column">
                 <div class="ui container segment">
@@ -12,7 +12,7 @@
                                 </div>
                                 <div class="content">
                                     <div>
-                                        <a class="ui header" href="{{ item.href }}" target="_blank">{{ item.title }}</a>
+                                        <a class="ui header" href="{{ item.second_href }}" target="_blank">{{ item.title }}</a>
                                     </div>
                                     <div class="description">
                                         <span style="color: rgba(0,132,255,0.76)">{{ item.category }}</span>

@@ -1,0 +1,38 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"/>
+    <meta name="referrer" content="never">  <!--解决禁止外链-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <title>{{ text.title }}</title>
+    <link rel="stylesheet" href="{% static 'css/semantic.min.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/semantic.min.js' %}"></script>
+    <style type="text/css">
+        p {
+            font-size: 1.2em;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="ui container" style="width: 60%; margin: 50px auto;">
+        <h2 class="ui center aligned header" style="margin-bottom: 30px">{{ text.title }}</h2>
+        <div>
+            {% for i in text.second_article %}
+                {% if 'https://inews.gtimg.com/newsapp_bt/' in i %}
+                    <img class="ui centered large image" src="{{ i }}" style="margin: 15px auto">
+                {% else %}
+                    <p>{{ i }}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="ui horizontal divider" style="margin-top: 60px">END</div>
+        <span style="color: #888888;text-align:center;display:block;">本项目新闻来源于腾讯新闻，仅用于毕业论文设计</span>
+    </div>
+</body>
+</html>

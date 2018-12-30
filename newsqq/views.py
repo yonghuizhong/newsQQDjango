@@ -56,3 +56,15 @@ def summaryAjax(request):
         'summary': my_summary
     }
     return JsonResponse(context)
+
+
+# details.html：新闻正文阅读页面
+def details(request):
+    id = request.GET.get('t')
+    text = Article.objects(_id=id)[0]
+    print(text)
+    context = {
+        'text': text
+    }
+    print(text)
+    return render(request, 'details.html', context)
