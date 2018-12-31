@@ -24,13 +24,18 @@
         <h2 class="ui center aligned header" style="margin-bottom: 30px">{{ text.title }}</h2>
         <div>
             {% for i in text.second_article %}
-                {% if 'https://inews.gtimg.com/newsapp_bt/' in i %}
+                {% if 'https://inews.gtimg.com/' in i %}
                     <img class="ui centered large image" src="{{ i }}" style="margin: 15px auto">
                 {% else %}
                     <p>{{ i }}</p>
                 {% endif %}
             {% endfor %}
         </div>
+
+        <div class="ui horizontal divider">article-for testing</div>
+        <a href="{{ text.href }}" target="_blank">{{ text.title }}</a>
+        <p>{{ text.article }}</p>
+
         <div class="ui horizontal divider" style="margin-top: 60px">END</div>
         <span style="color: #888888;text-align:center;display:block;">本项目新闻来源于腾讯新闻，仅用于毕业论文设计</span>
     </div>
