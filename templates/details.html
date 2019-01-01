@@ -13,6 +13,11 @@
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/semantic.min.js' %}"></script>
     <style type="text/css">
+        @media only screen and (min-width: 1024px) {
+            .ui.container {
+                width: 60% !important;
+            }
+        }
         p {
             font-size: 1.2em;
             line-height: 1.8;
@@ -20,7 +25,7 @@
     </style>
 </head>
 <body>
-    <div class="ui container" style="width: 60%; margin: 50px auto;">
+    <div class="ui container" style="margin: 50px auto;">
         <h2 class="ui center aligned header" style="margin-bottom: 30px">{{ text.title }}</h2>
         <div>
             {% for i in text.second_article %}
