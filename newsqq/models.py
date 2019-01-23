@@ -31,9 +31,14 @@ class Cate(Document):
     meta = {'collection': 'cate'}
 
 
-for i in Article.objects[:9]:  # 测试是否连接成功
-    print(i.keywords)
-    print(i.time)
+num = Article.objects(cate_en='politics').count()
+print(num)
+pipeline = [
+    {'$match': {'cate_en': 'politics'}},
+    {'$sample': {'size': 5}}
+]
+for i in Article.objects.aggregate(*pipeline):  # 测试是否连接成功
+    print(i['title'], i['cate_en'])
 
 for i in Cate.objects:
     print(i.type_link)

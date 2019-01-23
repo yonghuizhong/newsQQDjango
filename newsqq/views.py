@@ -12,8 +12,14 @@ def all_cate(request):
     limit = 10
     page = request.GET.get('page', 1)
     cate = request.GET.get('cate', 'politics')
-    article = Article.objects(cate_en=cate)
-    paginator = Paginator(article, limit)
+    num = Article.objects(cate_en=cate).count()
+    pipeline = [
+        {'$match': {'cate_en': cate}},
+        {'$sample': {'size': num}}
+    ]
+    article = Article.objects.aggregate(*pipeline)
+    # article = Article.objects(cate_en=cate)
+    paginator = Paginator(list(article), limit)
     load = paginator.page(page)
 
     if load.number <= 6:
