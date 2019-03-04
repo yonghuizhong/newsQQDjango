@@ -14,6 +14,16 @@
     <script src="{% static 'js/semantic.min.js' %}"></script>
 
     <style type="text/css">
+         .gradient {
+            background-color: #2B313C !important;/*default*/
+            padding: 6px 0 !important;
+            background: -ms-linear-gradient(left, #000113,#3E84B7) !important;/*IE 10*/
+            background: -moz-linear-gradient(left, #000113, #3E84B7) !important;/*Firefox*/
+            background: -webkit-gradient(linear, 0% 0%, 100% 100%, from(#000113), to(#3E84B7)) !important;/*Safari 4-5, Chrome 1-9*/
+            background: -webkit-linear-gradient(left, #000113, #3E84B7) !important;/*Safari5.1 Chrome 10+*/
+            background: -o-linear-gradient(left, #000113, #3E84B7) !important;/*Opera 11.10+*/
+        }
+
         .hidden.menu {
             display: none;
         }
@@ -94,7 +104,7 @@
 <!--以下为网站内容-->
 <div class="pusher" style="background-color: #f0f0f0">
     <!--顶部菜单栏-->
-    <div class="ui vertical center aligned segment fadeout" style="background-color: #2B313C; padding:6px 0">
+    <div class="ui vertical center aligned segment fadeout gradient">
         <div class="ui container">
             <div class="ui secondary inverted pointing menu" style="border-width: 0; font-size: 16px">
                 <a class="toc item" style="padding-right: 0px">

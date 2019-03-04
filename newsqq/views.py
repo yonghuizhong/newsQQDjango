@@ -4,7 +4,7 @@ from newsqq.models import Article
 from newsqq.models import Cate
 from django.http import JsonResponse
 from textrank4zh import TextRank4Sentence
-
+import datetime
 
 # Create your views here.
 # article.html：各类各页的新闻信息
@@ -12,10 +12,13 @@ def all_cate(request):
     limit = 10
     page = request.GET.get('page', str(1))
     cate = request.GET.get('cate', 'politics')
+    # 获取当前日期
+    today = datetime.date.today()
+    today_str = today.strftime('%Y-%m-%d')
     if page == str(1):
         # num = Article.objects(cate_en=cate).count()
         pipeline = [
-            {'$match': {'cate_en': cate}},
+            {'$match': {'$and': [{'cate_en': cate}, {'time': {'$regex': today_str}}]}},  # 日期为今天
             {'$sample': {'size': limit+1}}  # size需大于limit，否则不会出现下一页按钮
         ]
         article = Article.objects.aggregate(*pipeline)
