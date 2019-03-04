@@ -6,10 +6,12 @@ from django.http import JsonResponse
 from textrank4zh import TextRank4Sentence
 import datetime
 
+
 # Create your views here.
 # article.html：各类各页的新闻信息
 def all_cate(request):
     limit = 10
+    article_list = []
     page = request.GET.get('page', str(1))
     cate = request.GET.get('cate', 'politics')
     # 获取当前日期
@@ -17,14 +19,24 @@ def all_cate(request):
     today_str = today.strftime('%Y-%m-%d')
     if page == str(1):
         # num = Article.objects(cate_en=cate).count()
-        pipeline = [
+        pipeline1 = [
             {'$match': {'$and': [{'cate_en': cate}, {'time': {'$regex': today_str}}]}},  # 日期为今天
             {'$sample': {'size': limit+1}}  # size需大于limit，否则不会出现下一页按钮
         ]
-        article = Article.objects.aggregate(*pipeline)
+        article = Article.objects.aggregate(*pipeline1)
+        article_list = list(article)
+        if not article_list:  # 当数据不更新时，避免首页出现空白
+            print('数据未更新////////////////////////////////')
+            pipeline2 = [
+                {'$match': {'cate_en': cate}},
+                {'$sample': {'size': limit + 1}}
+            ]
+            article = Article.objects.aggregate(*pipeline2)
+            article_list = list(article)
     else:
         article = Article.objects(cate_en=cate)
-    paginator = Paginator(list(article), limit)
+        article_list = list(article)
+    paginator = Paginator(article_list, limit)
     load = paginator.page(page)
 
     if load.number <= 6:
