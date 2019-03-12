@@ -3,7 +3,7 @@ from django.shortcuts import render
 from newsqq.models import Article
 from newsqq.models import Cate
 from django.http import JsonResponse
-from textrank4zh import TextRank4Sentence
+from Summary import TextRankSentence
 import datetime
 
 
@@ -69,10 +69,10 @@ def summary(request):
 def summaryAjax(request):
     article = request.POST.get('article', '默认字段')
     # 暂时使用textRank生成摘要
-    tr4s = TextRank4Sentence()
-    tr4s.analyze(text=article, lower=True, source='all_filters')
+    tr = TextRankSentence.TextRankSentence()
+    tr.analyze(text=article)
     try:
-        my_summary = tr4s.get_key_sentences(num=1)[0].sentence
+        my_summary = tr.get_key_sentences(num=2)
     except:
         my_summary = '生成新闻摘要错误'
     context = {
