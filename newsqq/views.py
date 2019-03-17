@@ -25,8 +25,11 @@ def all_cate(request):
         ]
         article = Article.objects.aggregate(*pipeline1)
         article_list = list(article)
+        if(len(article_list)) < limit + 1:  # 当天新闻数量不够的情况下，避免没有下一页按钮的情况
+            limit = len(article_list) - 1
         if not article_list:  # 当数据不更新时，避免首页出现空白
             print('数据未更新////////////////////////////////')
+            limit = 10
             pipeline2 = [
                 {'$match': {'cate_en': cate}},
                 {'$sample': {'size': limit + 1}}
