@@ -7,7 +7,7 @@
 网站已部署，在手机、平板、电脑浏览器上展示正常；新闻内容每天更新    
 ```
 #### 主界面展示：  
-![界面GIF](./static/img/screen.gif)  
+![界面GIF](./static/img/screen-min.gif)  
 
 #### 摘要生成页面：  
 ![摘要生成页面](./static/img/genSummary.png)  
