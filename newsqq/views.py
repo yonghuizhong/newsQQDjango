@@ -70,10 +70,10 @@ def summary(request):
 
 # ajax
 def summaryAjax(request):
-    article = request.POST.get('article', '默认字段')
-    # 暂时使用textRank生成摘要
+    article = request.POST.get('article', '这是新闻内容')
+    title = request.POST.get('title', '这是标题')
     tr = TextRankSentence.TextRankSentence()
-    tr.analyze(text=article)
+    tr.analyze(text=article, title=title)
     try:
         my_summary = tr.get_key_sentences(num=2)
     except:

@@ -4,9 +4,14 @@
         <div class="row" style="padding-top: 0">
             <div class="column">
                 <div class="ui container segment">
+                    <h4 class="ui orange left ribbon label">新闻标题</h4>
+                    <div style="margin: 10px 0">
+                        <textarea class="ui message" id="inputTitle" rows="1" placeholder="请输入新闻标题..."
+                                  style="max-width: 100%; min-width: 100%; background: #ffffff;"></textarea>
+                    </div>
                     <h4 class="ui orange left ribbon label">新闻正文</h4>
                     <div style="margin: 10px 0">
-                        <textarea class="ui message" id="input" rows="10" placeholder="请输入新闻内容..."
+                        <textarea class="ui message" id="inputArticle" rows="10" placeholder="请输入新闻内容..."
                                   style="max-width: 100%; min-width: 100%; background: #ffffff;"></textarea>
                     </div>
 
@@ -36,9 +41,11 @@
                 $(this).css("display", "none");
                 $('#loadingButton').css("display", "inline-block");
 
-                var myArticle = $('#input').val();
+                var myTitle = $('#inputTitle').val();
+                var myArticle = $('#inputArticle').val();
                 var myData = {
-                    article: myArticle
+                    article: myArticle,
+                    title: myTitle
                 };
                 //console.log(myData);
 
